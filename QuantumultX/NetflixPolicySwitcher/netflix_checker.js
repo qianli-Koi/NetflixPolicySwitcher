@@ -10,6 +10,7 @@ let debug = $.getval('Helge_0x00.Netflix_Debug') === 'true'
 let retry = $.getval('Helge_0x00.Netflix_Retry') === 'true'
 let t = parseInt($.getval('Helge_0x00.Netflix_Timeout')) || 8000
 let sortByTime = $.getval('Helge_0x00.Netflix_Sort_By_Time') === 'true'
+let selectRegion = $.getval('Netflix_Select_Region') || undefined
 let concurrency = parseInt($.getval('Helge_0x00.Netflix_Concurrency')) || 10
 
 ;(async () => {
@@ -26,6 +27,11 @@ let concurrency = parseInt($.getval('Helge_0x00.Netflix_Concurrency')) || 10
   let candidatePolicies = lookupChildrenNode(policies, policyName)
 
   let { fullAvailablePolicies, originalAvailablePolicies } = await testPolicies(policyName, candidatePolicies)
+  if (selectRegion) {
+    for (let i = 0; i < fullAvailablePolicies.length; i++) {
+      if (fullAvailablePolicies[i].region != selectRegion) delete fullAvailablePolicies[i]
+    }
+  }
   if (sortByTime) {
     fullAvailablePolicies = fullAvailablePolicies.sort((m, n) => m.time - n.time)
     originalAvailablePolicies = originalAvailablePolicies.sort((m, n) => m.time - n.time)
