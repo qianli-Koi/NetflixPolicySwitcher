@@ -71,15 +71,15 @@ let concurrency = parseInt($.getval('Helge_0x00.Netflix_Concurrency')) || 10
     cacheOriginalPolicies = originalAvailablePolicies
     if (selectRegion) {
       let selectPolicy = []
-      for (let i = 0; i < fullAvailablePolicies.length; i++) {
-        if (fullAvailablePolicies[i].region == selectRegion) selectPolicy.push(fullAvailablePolicies[i])
+      for (let i = 0; i < cacheFullPolicies.length; i++) {
+        if (cacheFullPolicies[i].region == selectRegion) selectPolicy.push(cacheFullPolicies[i])
       }
-      fullAvailablePolicies = selectPolicy
+      cacheFullPolicies = selectPolicy
       selectPolicy = []
-      for (let i = 0; i < originalAvailablePolicies.length; i++) {
-        if (originalAvailablePolicies[i].region == selectRegion) selectPolicy.push(originalAvailablePolicies[i])
+      for (let i = 0; i < cacheOriginalPolicies.length; i++) {
+        if (cacheOriginalPolicies[i].region == selectRegion) selectPolicy.push(cacheOriginalPolicies[i])
       }
-      originalAvailablePolicies = selectPolicy
+      cacheOriginalPolicies = selectPolicy
     }
     if (sortByTime) {
       cacheFullPolicies = cacheFullPolicies.sort((m, n) => m.time - n.time)
