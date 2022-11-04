@@ -28,9 +28,16 @@ let concurrency = parseInt($.getval('Helge_0x00.Netflix_Concurrency')) || 10
 
   let { fullAvailablePolicies, originalAvailablePolicies } = await testPolicies(policyName, candidatePolicies)
   if (selectRegion) {
+    let selectPolicy = []
     for (let i = 0; i < fullAvailablePolicies.length; i++) {
-      if (fullAvailablePolicies[i].region != selectRegion) delete fullAvailablePolicies[i]
+      if (fullAvailablePolicies[i].region == selectRegion) selectPolicy.push(fullAvailablePolicies[i])
     }
+    fullAvailablePolicies = selectPolicy
+    selectPolicy = []
+    for (let i = 0; i < originalAvailablePolicies.length; i++) {
+      if (originalAvailablePolicies[i].region == selectRegion) selectPolicy.push(originalAvailablePolicies[i])
+    }
+    originalAvailablePolicies = selectPolicy
   }
   if (sortByTime) {
     fullAvailablePolicies = fullAvailablePolicies.sort((m, n) => m.time - n.time)
