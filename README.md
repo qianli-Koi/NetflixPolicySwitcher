@@ -1,4 +1,4 @@
-# Netflix批量检测
+# Netflix批量检测(仅支持QuantumultX)
 ## 新增功能
 * 选择节点地区
 * 开/关脚本通知
